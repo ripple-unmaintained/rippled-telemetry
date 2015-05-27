@@ -1,0 +1,13 @@
+---
+- name: update package system
+  apt: update_cache=yes
+- name: install erlang
+  apt: name=erlang-nox state=present
+- name: download rabbitmq key
+  apt_key: state=present url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+- name: add rabbitmq to sources
+  shell: echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+- name: update apt cache
+  apt: update_cache=yes
+- name: install rabbitmq-server
+  apt: name=rabbitmq-server state=present

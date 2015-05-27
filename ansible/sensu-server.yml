@@ -1,0 +1,5 @@
+---
+- name: Install Sensu Server
+  hosts: all
+  roles:
+    - sensu-server
