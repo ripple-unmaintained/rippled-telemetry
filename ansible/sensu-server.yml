@@ -1,5 +1,9 @@
 ---
 - name: Install Sensu Server
   hosts: all
+  sudo: True
   roles:
-    - sensu-server
+    - common
+    - rabbitmq
+    - redis
+    - sensu

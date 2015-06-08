@@ -1,0 +1,29 @@
+---
+- name: install erlang
+  apt: name=erlang-nox state=present
+- name: download rabbitmq key
+  apt_key: state=present url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+- name: add rabbitmq to sources
+  shell: echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee /etc/apt/sources.list.d/rabbitmq.list
+- name: update apt cache
+  apt: update_cache=yes
+- name: install rabbitmq-server
+  apt: name=rabbitmq-server state=present
+- name: download ssl cert generation tool
+  shell: wget http://sensuapp.org/docs/0.13/tools/ssl_certs.tar && tar -xvf ssl_certs.tar
+  args:
+    chdir: /tmp
+- name: generate ssl certificate
+  shell: ./ssl_certs.sh generate
+  sudo: True
+  args:
+    chdir: /tmp/ssl_certs
+- name: create rabbitmq ssl directory
+  file: state=directory dest=/etc/rabbitmq/ssl
+- name: copy over the certificates to /etc/rabbitmq/ssl
+  shell: cp /tmp/ssl_certs/sensu_ca/cacert.pem /tmp/ssl_certs/server/cert.pem /tmp/ssl_certs/server/key.pem /etc/rabbitmq/ssl
+  sudo: True
+- name: configure rabbitmq
+  copy: src=rabbitmq.config dest=/etc/rabbitmq/rabbitmq.config
+- name: Restart rabbitmq-server service
+  service: name=rabbitmq-server state=restarted
