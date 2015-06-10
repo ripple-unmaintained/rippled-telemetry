@@ -1,7 +1,7 @@
 {
   "client": {
     "name": "server",
-    "address": "localhost",
+    "address": "127.0.0.1",
     "subscriptions": [ "ALL" ]
   }
 }

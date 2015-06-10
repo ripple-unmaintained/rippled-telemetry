@@ -1,0 +1,7 @@
+---
+- name: Install nginx webserver
+  apt: name=nginx state=latest
+- name: Configure nginx reverse proxy
+  copy: src=nginx.conf dest=/etc/nginx/sites-available/default
+- name: restart nginx
+  service: name=nginx state=restarted

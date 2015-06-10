@@ -7,3 +7,5 @@
     - rabbitmq
     - redis
     - sensu
+    - nginx
+    - sensu-client-rippled

@@ -1,0 +1,10 @@
+{
+  "checks": {
+    "rippled_check": {
+      "command": "/etc/sensu/plugins/check-rippled.rb",
+      "interval": 10,
+      "subscribers": [ "rippled" ]
+    }
+  }
+}
+
