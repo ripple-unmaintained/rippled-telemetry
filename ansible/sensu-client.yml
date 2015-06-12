@@ -1,0 +1,8 @@
+---
+- name: Install Sensu Server
+  hosts: all
+  sudo: True
+  roles:
+    - common
+    - rabbitmq
+    - sensu
