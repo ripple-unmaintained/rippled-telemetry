@@ -3,6 +3,6 @@
   apt: name=sensu state=latest
 
 - name: Configure rippled service check
-  copy: src=check_rippled.rb dest=/etc/sensu/plugins/check_rippled.rb
+  copy: src=check-rippled.rb dest=/etc/sensu/plugins/check-rippled.rb
 - copy: src=check-rippled.json dest=/etc/sensu/conf.d/check-rippled.json
 
