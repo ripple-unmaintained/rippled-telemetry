@@ -6,6 +6,6 @@
     - common
     - rabbitmq
     - redis
-    - sensu
+    - sensu-server
     - nginx
     - sensu-client-rippled

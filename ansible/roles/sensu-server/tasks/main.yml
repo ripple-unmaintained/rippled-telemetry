@@ -1,0 +1,52 @@
+---
+- name: add rabbitmq virtual host for sensu
+  sudo: True
+  shell: rabbitmqctl add_vhost /sensu
+  ignore_errors: yes 
+- shell: rabbitmqctl add_user sensu pass
+  sudo: True
+  ignore_errors: yes 
+- shell: rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+  sudo: True
+  ignore_errors: yes 
+- name: download sensu key
+  shell: wget -q http://repos.sensuapp.org/apt/pubkey.gpg -O- | sudo apt-key add -
+- name: add sensu to sources
+  shell: echo "deb   http://repos.sensuapp.org/apt sensu main" | sudo tee -a /etc/apt/sources.list.d/sensu.list
+- name: update apt cache
+  apt: update_cache=yes
+- name: install sensu
+  apt: name=sensu state=latest
+- name: install uchiwa
+  apt: name=uchiwa state=latest
+- name: Copy rabbitmq ssl keys into sensu ssl config
+  shell: mkdir -p /etc/sensu/ssl && cp /tmp/ssl_certs/client/cert.pem /tmp/ssl_certs/client/key.pem /etc/sensu/ssl
+  sudo: true
+- name: Configure Sensu connection to RabbitMQ
+  copy: src=rabbitmq.json dest=/etc/sensu/conf.d/rabbitmq.json
+- name: Configure Sensu connection to Redis
+  copy: src=redis.json dest=/etc/sensu/conf.d/redis.json
+- name: Configure Sensu API
+  copy: src=api.json dest=/etc/sensu/conf.d/api.json
+- name: Configure Uchiwa Web
+  copy: src=uchiwa.json dest=/etc/sensu/uchiwa.json
+- name: Configure Local Sensu Client
+  copy: src=client.json dest=/etc/sensu/conf.d/client.json
+- name: Enable services to start automatically
+  shell: update-rc.d sensu-server defaults
+  sudo: true
+  shell: update-rc.d sensu-client defaults
+  sudo: true
+  shell: update-rc.d sensu-api defaults
+  sudo: true
+  shell: update-rc.d uchiwa defaults
+  sudo: true
+- name: Start the Sensu services
+  service: name=sensu-server state=started
+  sudo: True
+- service: name=sensu-client state=started
+  sudo: True
+- service: name=sensu-api state=started
+  sudo: True
+- service: name=uchiwa state=started
+  sudo: True
