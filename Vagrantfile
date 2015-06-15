@@ -8,13 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "ubuntu/trusty64"
 
-  config.hostmanager.enabled = true
-  config.hostmanager.manage_host = true
-  config.hostmanager.ignore_private_ip = false
-  config.hostmanager.include_offline = true
-
-  config.vm.define "server" do |server|
-    server.vm.hostname = "sensu-server"
+ config.vm.define "server" do |server|
     server.vm.network :public_network, ip: "192.168.50.4"
     server.vm.network :forwarded_port, guest: 3000, host: 3000
     server.vm.network :forwarded_port, guest: 4567, host: 4567
@@ -26,7 +20,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "client" do |client|
-    client.vm.hostname = "sensu-client"
     client.vm.network :public_network, ip: "192.168.50.3"
 
     client.vm.provision :ansible do |ansible|
