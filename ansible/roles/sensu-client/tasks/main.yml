@@ -1,0 +1,8 @@
+---
+- name: copy sensu client configuration for rippled
+  copy: src=conf.d/client.json dest=/etc/sensu/conf.d/client.json
+- name: configure sensu-client to launch on system start
+  shell: update-rc.d sensu-client defaults
+  sudo: true
+- name: start sensu-client service
+  service: name=sensu-client state=started

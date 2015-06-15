@@ -1,0 +1,11 @@
+---
+- name: Install uchiwa web dashboard
+  apt: name=uchiwa state=latest
+- name: Copy uchiwa web dashboard configuration
+  copy: src=uchiwa.json dest=/etc/sensu/uchiwa.json
+- name: Configure uchiwa to launch on system start
+  shell: update-rc.d uchiwa defaults
+  sudo: true
+- name: Start uchiwa service
+  service: name=uchiwa state=started
+  sudo: True

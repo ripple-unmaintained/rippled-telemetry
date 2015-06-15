@@ -2,10 +2,18 @@
 - name: Install Sensu Server
   hosts: all
   sudo: True
+  vars:
+    - rabbitmq_host: 127.0.0.1
+    - rabbitmq_port: 5671
+    - rabbitmq_vhost: /sensu
+    - rabbitmq_user: sensu
+    - rabbitmq_pass: pass
   roles:
     - common
     - rabbitmq
     - redis
+    - sensu-common
     - sensu-server
+    - uchiwa
     - nginx
     - sensu-client-rippled
