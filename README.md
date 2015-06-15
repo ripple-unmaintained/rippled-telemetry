@@ -3,13 +3,7 @@
 A Vagrantfile is provided to test the ansible installation
 and configuration of the Sensu Server, RabbitMQ, and Redis
 
-#### Start the Sensu Server
+#### Start the Sensu Server and Client
 ````
-cd server && vagrant up --provision
+vagrant up --provision
 ````
-
-#### Start the Sensu Client
-````
-cd client && vagrant up --provision
-````
-
