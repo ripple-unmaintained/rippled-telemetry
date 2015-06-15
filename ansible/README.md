@@ -34,8 +34,8 @@ of the system across deploys and updates.
 - rabbitmq_ssl_cert
 - rabbitmq_ssl_key
 - rabbitmq_vhost  (/sensu)
-- rabbitmq_user   (sensu)_
-- rabbitmq_pass   (password)
+- rabbitmq_user   (sensu)
+- rabbitmq_pass   (pass)
 - rabbitmq_port   (5671)
 - rabbitmq_host   (127.0.0.1)
 
