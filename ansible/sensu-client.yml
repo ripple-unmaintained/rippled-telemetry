@@ -1,5 +1,5 @@
 ---
-- name: Install Sensu Server
+- name: Install Sensu Client with Open Socket
   hosts: all
   sudo: True
   vars:
