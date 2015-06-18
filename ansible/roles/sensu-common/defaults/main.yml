@@ -1,0 +1,8 @@
+---
+- rabbitmq_host: 127.0.0.1
+- rabbitmq_user: sensu
+- rabbitmq_pass: pass
+- rabbitmq_port: 5671
+- rabbitmq_vhost: /sensu
+- rabbitmq_ssl_cert_file: ssl/cert.pem
+- rabbitmq_ssl_key_file: ssl/key.pem
