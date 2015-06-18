@@ -12,7 +12,7 @@
     - common
     - rabbitmq
     - redis
-    - sensu-common
+    - sensu
     - sensu-server
     - uchiwa
     - nginx

@@ -9,10 +9,6 @@
   apt: name=sensu state=latest
 - name: create ssl directory
   file: path=/etc/sensu/ssl state=directory
-- name: Copy rabbitmq ssl keys into sensu ssl config
-  copy: src={{rabbitmq_ssl_cert_file}} dest=/etc/sensu/ssl/cert.pem
-- copy: src={{rabbitmq_ssl_key_file}} dest=/etc/sensu/ssl/key.pem
-  sudo: true
 - name: Configure Sensu connection to RabbitMQ
   template: src=rabbitmq.json.j2 dest=/etc/sensu/conf.d/rabbitmq.json
 - shell: update-rc.d sensu-client defaults
