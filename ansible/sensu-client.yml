@@ -3,7 +3,7 @@
   hosts: all
   sudo: True
   vars:
-    - rabbitmq_host: 192.168.50.4
+    - rabbitmq_host: 52.74.28.241
     - rabbitmq_port: 5671
     - rabbitmq_vhost: /sensu
     - rabbitmq_user: sensu
@@ -12,3 +12,4 @@
     - common
     - sensu
     - sensu-client
+    - mock-validation-tracker

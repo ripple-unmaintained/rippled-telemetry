@@ -1,0 +1,10 @@
+---
+- name: Copy the mock_validation_tracker.sh into /opt
+  copy: src=mock_validation_tracker.sh dest=/opt/mock_validation_tracker.sh
+- name: make mock_validation_tracker.sh executable
+  shell: chmod +x /opt/mock_validation_tracker.sh
+  sudo: True
+- name: Configure upstart script for mock_validation_tracker
+  copy: src=mock_validation_tracker.upstart dest=/etc/init/mock_validation_tracker.conf
+- name: Start mock_validation_tracker server
+  service: name=mock_validation_tracker state=started
