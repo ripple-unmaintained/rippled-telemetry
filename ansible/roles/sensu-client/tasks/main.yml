@@ -3,7 +3,7 @@
   copy: src={{sensu_ssl_cert_file}} dest=/etc/sensu/ssl/cert.pem
 - copy: src={{sensu_ssl_key_file}} dest=/etc/sensu/ssl/key.pem
   sudo: true
-- name: copy sensu client configuration for rippled
+- name: copy default sensu client configuration
   copy: src=conf.d/client.json dest=/etc/sensu/conf.d/client.json
 - name: configure sensu-client to launch on system start
   shell: update-rc.d sensu-client defaults

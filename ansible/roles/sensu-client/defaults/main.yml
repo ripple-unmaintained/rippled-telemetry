@@ -1,0 +1,3 @@
+---
+- sensu_ssl_cert_file: ssl/cert.pem
+- sensu_ssl_key_file: ssl/key.pem
