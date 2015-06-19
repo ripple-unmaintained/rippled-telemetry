@@ -1,7 +1,11 @@
 {
   "client": {
-    "name": "rippled",
+    "name": "rippled-remote",
     "address": "127.0.0.1",
-    "subscriptions": [ "ALL" ]
+    "subscriptions": [ "ALL" ],
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3031
+    }
   }
 }
